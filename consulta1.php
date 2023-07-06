@@ -76,9 +76,9 @@
                             user=webuser;
                             password=futbol2023');
             
-            $stmt = $pdo->prepare('SELECT P.Jugador, P.Goles, home.name AS EquipoLocal, P.homeGoals AS GolesLocal, away.name AS EquipoVisita, P.awayGoals AS GolesVisita, liga.name AS Liga, P.date
-            FROM Futbol.Equipos home, Futbol.Equipos away, Futbol.Liga liga, (
-                SELECT J.Jugador, J.Goles, P.homeTeamID, P.awayTeamID, P.homeGoals, P.awayGoals, P.leagueID, P.date
+            $stmt = $pdo->prepare("SELECT P.Jugador, P.Goles, home.name AS EquipoLocal, P.homeGoals AS GolesLocal, away.name AS EquipoVisita, P.awayGoals AS GolesVisita, liga.name AS Liga, P.date
+            FROM  Futbol.NEquipo home, Futbol.NEquipo away, Futbol.Liga liga, (
+                SELECT J.Jugador, J.Goles, P.gameID, P.homeGoals, P.awayGoals, P.leagueID, P.date
                 FROM Futbol.Partido P, (
                     SELECT J.name AS Jugador, A.goals AS Goles, A.gameID
                     FROM Futbol.Aparece A, Futbol.Jugadores J
@@ -88,8 +88,8 @@
                 ) J
                 WHERE J.gameID=P.gameID
             ) P
-            WHERE home.teamID=P.homeTeamID AND away.teamID=P.awayTeamID AND liga.leagueID=P.leagueID
-            ORDER BY P.date;');
+            WHERE home.gameID=P.gameID AND home.location = 'h' AND away.gameID=P.gameID AND away.location = 'a' AND liga.leagueID=P.leagueID
+            ORDER BY P.date;");
             $stmt->execute(['valor1' => "%".$variable1."%"]);
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 

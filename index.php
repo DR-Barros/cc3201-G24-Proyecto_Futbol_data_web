@@ -69,7 +69,7 @@
                         </select>
                     </div>
                     <div>
-                        <label> Nombre Jugador: </label>
+                        <label> Fecha: </label>
                         <input name="fecha" type="date" value="2021-05-24" min="2014-08-09" max="2021-05-24" >
                     </div>
     

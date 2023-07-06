@@ -59,7 +59,7 @@
                         </select>
                     </div>
                     <div>
-                        <label> Nombre Jugador: </label>
+                        <label> Fecha: </label>
                         <?php
                             $variable2 = $_GET['fecha'];
                             echo "<input name='fecha' type='date' value='$variable2' min='2014-08-09' max='2021-05-24' >";
